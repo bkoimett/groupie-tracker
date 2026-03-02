@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Groupie Tracker</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>🎸 Groupie Tracker</h1>
+    </header>
+
+    <main class="error-page">
+        <h2>Oops! Something went wrong</h2>
+        <p class="error-message">{{.Message}}</p>
+        <p>Status Code: {{.Status}}</p>
+        <a href="/" class="home-button">← Go Back Home</a>
+    </main>
+
+    <footer>
+        <p>© 2024 Groupie Tracker - Zone01 Kisumu</p>
+    </footer>
+</body>
+</html>
