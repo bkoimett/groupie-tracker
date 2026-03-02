@@ -1,0 +1,13 @@
+package models
+
+// Artist represents the structure from the /artists endpoint
+type Artist struct {
+    ID           int      `json:"id"`
+    Image        string   `json:"image"`
+    Name         string   `json:"name"`
+    Members      []string `json:"members"`
+    CreationDate int      `json:"creationDate"`
+    FirstAlbum   string   `json:"firstAlbum"`
+}
+
+// We'll add Locations, Dates, and Relation structs later
