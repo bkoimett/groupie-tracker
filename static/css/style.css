@@ -161,3 +161,267 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+
+/* Artist Navigation */
+.artist-nav {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.back-home {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.back-home:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Artist Header */
+.artist-header-content {
+    position: relative;
+    padding-top: 60px;
+}
+
+.artist-header-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 4px solid white;
+    margin-bottom: 1rem;
+    object-fit: cover;
+}
+
+/* Artist Detail Sections */
+.artist-detail {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.info-section,
+.members-section,
+.locations-section,
+.dates-section,
+.relations-section {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.info-section h2,
+.members-section h2,
+.locations-section h2,
+.dates-section h2,
+.relations-section h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #667eea;
+}
+
+/* Info Grid */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-card {
+    text-align: center;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.info-card h3 {
+    color: #667eea;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.info-card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Members List */
+.members-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.member-item {
+    padding: 0.8rem;
+    background: #f0f4ff;
+    border-radius: 5px;
+    text-align: center;
+    color: #667eea;
+    font-weight: 500;
+}
+
+/* Locations Grid */
+.locations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.location-card {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 5px;
+    transition: transform 0.2s ease;
+}
+
+.location-card:hover {
+    transform: translateX(5px);
+    background: #e8f0fe;
+}
+
+.location-icon {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.location-card p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* Dates Timeline */
+.dates-timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.date-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 5px;
+    transition: transform 0.2s ease;
+}
+
+.date-item:hover {
+    transform: scale(1.05);
+}
+
+.date-icon {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+.date-item p {
+    font-weight: 500;
+}
+
+/* Tour Schedule */
+.tour-schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.tour-item {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border-left: 4px solid #667eea;
+}
+
+.tour-date {
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.tour-locations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tour-location {
+    background: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    color: #666;
+    border: 1px solid #e0e0e0;
+}
+
+/* No Data Message */
+.no-data {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 5px;
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    padding: 3rem;
+    color: #667eea;
+    font-size: 1.2rem;
+}
+
+.loading::after {
+    content: '...';
+    animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .artist-header-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .members-list {
+        grid-template-columns: 1fr;
+    }
+
+    .locations-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dates-timeline {
+        grid-template-columns: 1fr;
+    }
+
+    .artist-detail {
+        padding: 1rem;
+    }
+}
