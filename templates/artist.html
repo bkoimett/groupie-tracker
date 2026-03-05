@@ -5,41 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{.Name}} - Groupie Tracker</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <nav class="artist-nav">
-            <a href="/" class="back-home">← Back to Artists</a>
-        </nav>
-        <div class="artist-header-content">
-            <img src="{{.Image}}" alt="{{.Name}}" class="artist-header-image">
-            <h1>{{.Name}}</h1>
+        <div class="container header-inner">
+            <div class="logo">
+                <h1>⍟ groupie tracker</h1>
+                <p>artist profile</p>
+            </div>
+            <a href="/" class="back-link">← back to artists</a>
         </div>
     </header>
 
-    <main class="artist-detail">
+    <main class="container">
+        <!-- Artist Header -->
+        <div class="artist-header">
+            <img src="{{.Image}}" alt="{{.Name}}" class="artist-header-image">
+            <h1>{{.Name}}</h1>
+        </div>
+
         <!-- Basic Info Section -->
-        <section class="info-section">
-            <h2>Band Information</h2>
+        <section>
+            <h2 class="section-title">band information</h2>
             <div class="info-grid">
                 <div class="info-card">
-                    <h3>Formed</h3>
+                    <h3>formed</h3>
                     <p>{{.CreationDate}}</p>
                 </div>
                 <div class="info-card">
-                    <h3>First Album</h3>
+                    <h3>first album</h3>
                     <p>{{.FirstAlbum}}</p>
                 </div>
                 <div class="info-card">
-                    <h3>Members</h3>
+                    <h3>members</h3>
                     <p>{{len .Members}}</p>
                 </div>
             </div>
         </section>
 
         <!-- Members Section -->
-        <section class="members-section">
-            <h2>Band Members</h2>
+        <section>
+            <h2 class="section-title">band members</h2>
             <ul class="members-list">
                 {{range .Members}}
                 <li class="member-item">{{.}}</li>
@@ -48,50 +55,50 @@
         </section>
 
         <!-- Concert Locations Section -->
-        <section class="locations-section">
-            <h2>Concert Locations</h2>
+        <section>
+            <h2 class="section-title">concert locations</h2>
             {{if .Locations}}
             <div class="locations-grid">
                 {{range .Locations}}
                 <div class="location-card">
                     <span class="location-icon">📍</span>
-                    <p>{{. | formatLocation}}</p>
+                    <p class="format-location">{{.}}</p>
                 </div>
                 {{end}}
             </div>
             {{else}}
-            <p class="no-data">No location data available</p>
+            <p class="no-data">no location data available</p>
             {{end}}
         </section>
 
         <!-- Concert Dates Section -->
-        <section class="dates-section">
-            <h2>Concert Dates</h2>
+        <section>
+            <h2 class="section-title">concert dates</h2>
             {{if .ConcertDates}}
             <div class="dates-timeline">
                 {{range .ConcertDates}}
                 <div class="date-item">
                     <span class="date-icon">📅</span>
-                    <p>{{. | formatDate}}</p>
+                    <p class="format-date">{{.}}</p>
                 </div>
                 {{end}}
             </div>
             {{else}}
-            <p class="no-data">No date data available</p>
+            <p class="no-data">no date data available</p>
             {{end}}
         </section>
 
         <!-- Relations Section (Dates mapped to locations) -->
         {{if .Relations}}
-        <section class="relations-section">
-            <h2>Tour Schedule</h2>
+        <section>
+            <h2 class="section-title">tour schedule</h2>
             <div class="tour-schedule">
                 {{range $date, $locations := .Relations}}
                 <div class="tour-item">
-                    <div class="tour-date">{{$date | formatDate}}</div>
+                    <div class="tour-date format-date">{{$date}}</div>
                     <div class="tour-locations">
                         {{range $locations}}
-                        <span class="tour-location">{{. | formatLocation}}</span>
+                        <span class="tour-location format-location">{{.}}</span>
                         {{end}}
                     </div>
                 </div>
@@ -102,7 +109,11 @@
     </main>
 
     <footer>
-        <p>© 2024 Groupie Tracker - Zone01 Kisumu</p>
+        <div class="container">
+            <p>© 2025 groupie tracker — zone01 kisumu · neon edition</p>
+        </div>
     </footer>
+
+    <script src="/static/js/main.js"></script>
 </body>
 </html>

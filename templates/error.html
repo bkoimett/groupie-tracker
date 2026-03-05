@@ -5,21 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error - Groupie Tracker</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <h1>🎸 Groupie Tracker</h1>
+        <div class="container header-inner">
+            <div class="logo">
+                <h1>⍟ groupie tracker</h1>
+                <p>error · glitch in the matrix</p>
+            </div>
+            <a href="/" class="back-link">← back to safety</a>
+        </div>
     </header>
 
-    <main class="error-page">
-        <h2>Oops! Something went wrong</h2>
-        <p class="error-message">{{.Message}}</p>
-        <p>Status Code: {{.Status}}</p>
-        <a href="/" class="home-button">← Go Back Home</a>
+    <main class="container">
+        <div class="error-container">
+            <h2>⚠️ system failure</h2>
+            <div class="error-message">
+                {{.Message}}
+            </div>
+            <p class="error-status">status code: {{.Status}}</p>
+            <a href="/" class="home-button">← return home</a>
+        </div>
     </main>
 
     <footer>
-        <p>© 2024 Groupie Tracker - Zone01 Kisumu</p>
+        <div class="container">
+            <p>© 2025 groupie tracker — zone01 kisumu · neon edition</p>
+        </div>
     </footer>
+
+    <script src="/static/js/main.js"></script>
 </body>
 </html>

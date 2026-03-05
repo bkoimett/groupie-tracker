@@ -5,24 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Groupie Tracker - Artist Gallery</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <h1>🎸 Groupie Tracker</h1>
-        <p>Discover your favorite artists and their tour dates</p>
+        <div class="container header-inner">
+            <div class="logo">
+                <h1>⍟ groupie tracker</h1>
+                <p>discover · explore · experience</p>
+            </div>
+            <div class="header-search">
+                <input type="text" id="artist-search" placeholder="🔍 Search artists..." style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 40px; padding: 0.7rem 1.5rem; color: white; width: 250px; outline: none;">
+            </div>
+        </div>
     </header>
 
-    <main>
+    <main class="container">
         <div class="artist-grid">
             {{range .}}
-            <div class="artist-card">
-                <img src="{{.Image}}" alt="{{.Name}}" class="artist-image">
+            <div class="artist-card" data-id="{{.ID}}">
+                <img src="{{.Image}}" alt="{{.Name}}" class="artist-image" loading="lazy">
                 <div class="artist-info">
                     <h2>{{.Name}}</h2>
-                    <p><strong>Formed:</strong> {{.CreationDate}}</p>
-                    <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
-                    <p><strong>Members:</strong> {{len .Members}}</p>
-                    <a href="/artist?id={{.ID}}" class="details-link">View Details →</a>
+                    <p><span class="icon">📆</span> formed: {{.CreationDate}}</p>
+                    <p><span class="icon">💿</span> first album: {{.FirstAlbum}}</p>
+                    <p><span class="icon">👥</span> members: {{len .Members}}</p>
+                    <a href="/artist?id={{.ID}}" class="details-link">view details →</a>
                 </div>
             </div>
             {{end}}
@@ -30,7 +38,11 @@
     </main>
 
     <footer>
-        <p>© 2024 Groupie Tracker - Zone01 Kisumu</p>
+        <div class="container">
+            <p>© 2025 groupie tracker — zone01 kisumu · neon edition</p>
+        </div>
     </footer>
+
+    <script src="/static/js/main.js"></script>
 </body>
 </html>
