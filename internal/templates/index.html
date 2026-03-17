@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupie Tracker - Artist Gallery</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <div class="logo">
+                <h1>⍟ groupie tracker</h1>
+                <p>discover · explore · experience</p>
+            </div>
+            <div class="header-search">
+                <input type="text" id="artist-search" placeholder="🔍 Search artists...">
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="artist-grid">
+            {{range .}}
+            <div class="artist-card" data-id="{{.ID}}">
+                <img src="{{.Image}}" alt="{{.Name}}" class="artist-image" loading="lazy">
+                <div class="artist-info">
+                    <h2>{{.Name}}</h2>
+                    <p><span>📆</span> formed: {{.CreationDate}}</p>
+                    <p><span>💿</span> first album: {{.FirstAlbum}}</p>
+                    <p><span>👥</span> members: {{len .Members}}</p>
+                    <a href="/artist?id={{.ID}}" class="details-link">view details →</a>
+                </div>
+            </div>
+            {{end}}
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 groupie tracker — zone01 kisumu</p>
+        </div>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
