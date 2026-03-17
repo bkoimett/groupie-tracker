@@ -1,11 +1,7 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/api/index.go" }
-  ],
-  "builds": [
-    {
-      "src": "api/*.go",
-      "use": "@vercel/go"
+  "functions": {
+    "api/*.go": {
+      "runtime": "go@1.x"
     }
-  ]
+  }
 }
