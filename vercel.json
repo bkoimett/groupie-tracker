@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/*.go": {
+    "api/index.go": {
       "runtime": "go@1.x"
     }
   }
