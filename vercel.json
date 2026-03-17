@@ -1,7 +1,14 @@
 {
-  "functions": {
-    "api/index.go": {
-      "runtime": "go@1.21.0"
+  "builds": [
+    {
+      "src": "api/index.go",
+      "use": "@vercel/go"
     }
-  }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "api/index.go"
+    }
+  ]
 }
