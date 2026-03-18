@@ -7,6 +7,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 )
 
 // TemplateCache stores parsed templates for reuse
@@ -38,14 +39,18 @@ func main() {
 	r := routes.NewRoutes(router)
 
 	// Start server
-	port := ":8080"
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // default for local environment
+	}
+
 	fmt.Printf("🚀 Server starting on http://localhost%s\n", port)
 	fmt.Println("📦 Press Ctrl+C to stop")
 	for _, t := range router {
 		fmt.Printf("%v	%v\n", t.Method, t.Path)
 	}
 
-	err := http.ListenAndServe(port, r)
+	err := http.ListenAndServe(":"+port, r)
 	if err != nil {
 		log.Fatal("Server failed to start:", err)
 	}
