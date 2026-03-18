@@ -10,7 +10,6 @@ import (
 	"groupie-tracker/internal/handlers" // Import the real handlers
 )
 
-
 func TestIndexTemplate(t *testing.T) {
 	// Use REAL functions
 	funcMap := template.FuncMap{
@@ -35,7 +34,7 @@ func TestIndexTemplate(t *testing.T) {
 		ConcertDates []string
 		Relations    map[string][]string
 	}
-	
+
 	data := []MockArtist{
 		{
 			ID:           1,
@@ -54,15 +53,15 @@ func TestIndexTemplate(t *testing.T) {
 	}
 
 	result := buf.String()
-	
+
 	// Check for required elements
 	required := []string{
-		"Test Artist", 
-		"2020", 
+		"Test Artist",
+		"2020",
 		"artist-card",
 		"details-link",
 	}
-	
+
 	for _, req := range required {
 		if !strings.Contains(result, req) {
 			t.Errorf("Template missing: %s", req)
@@ -93,7 +92,7 @@ func TestArtistTemplate(t *testing.T) {
 		ConcertDates []string
 		Relations    map[string][]string
 	}
-	
+
 	data := MockFullArtistData{
 		Name:         "Test Artist",
 		Image:        "/test.jpg",
@@ -116,17 +115,17 @@ func TestArtistTemplate(t *testing.T) {
 
 	result := buf.String()
 	required := []string{
-		"Test Artist", 
-		"2020", 
-		"Member 1", 
+		"Test Artist",
+		"2020",
+		"Member 1",
 		"Member 2",
-		"london_uk", 
+		"london_uk",
 		"2020-01-20",
 		"tour-schedule",
 		"location-card",
 		"date-item",
 	}
-	
+
 	for _, req := range required {
 		if !strings.Contains(result, req) {
 			t.Errorf("Template missing: %s", req)
@@ -162,7 +161,7 @@ func TestErrorTemplate(t *testing.T) {
 
 	result := buf.String()
 	required := []string{"404", "Page not found", "error-container", "home-button"}
-	
+
 	for _, req := range required {
 		if !strings.Contains(result, req) {
 			t.Errorf("Template missing: %s", req)
@@ -172,7 +171,7 @@ func TestErrorTemplate(t *testing.T) {
 
 func TestThemeToggleInTemplates(t *testing.T) {
 	files := []string{"index.html", "artist.html", "error.html"}
-	
+
 	for _, file := range files {
 		t.Run(file, func(t *testing.T) {
 			content, err := os.ReadFile(file)

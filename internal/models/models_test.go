@@ -155,9 +155,9 @@ func TestFullArtistDataComposition(t *testing.T) {
 	}
 
 	full := FullArtistData{
-		Artist:    artist,
-		Locations: []string{"New_York", "Los_Angeles"},
-		Dates:     []string{"2026-03-01", "2026-03-05"},
+		Artist:       artist,
+		Locations:    []string{"New_York", "Los_Angeles"},
+		ConcertDates: []string{"2026-03-01", "2026-03-05"},
 		Relations: map[string][]string{
 			"2026-03-01": {"New_York"},
 			"2026-03-05": {"Los_Angeles", "Chicago"},

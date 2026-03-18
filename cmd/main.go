@@ -13,41 +13,36 @@ import (
 var TemplateCache *template.Template
 
 func init() {
-	// Register template functions
-	funcMap := template.FuncMap{
-		"formatLocation": handlers.FormatLocation,
-		"formatDate":     handlers.FormatDate,
-	}
-
 	// Parse all templates with functions
-	TemplateCache = template.Must(template.New("").Funcs(funcMap).ParseGlob("../internal/templates/*.html"))
+	TemplateCache = template.Must(template.New("").ParseGlob("../internal/templates/*.html"))
 
 	// Make templates available to handlers
 	handlers.SetTemplateCache(TemplateCache)
 }
 
 func main() {
-	var trees []routes.Tree
-	trees = append(trees, routes.Tree{
-		Handler: handlers.HomeHandler,
-		Method: http.MethodGet,
-		Path: "/",
-	},
-	routes.Tree{
-		Handler: handlers.ArtistHandler,
-		Method: http.MethodGet,
-		Path: "/artist",
-	})
+	var router []routes.Routes
+	router = append(router,
+		routes.Routes{
+			Method:  http.MethodGet,
+			Path:    "/",
+			Handler: handlers.HomeHandler,
+		},
+		routes.Routes{
+			Method:  http.MethodGet,
+			Path:    "/artist",
+			Handler: handlers.ArtistHandler,
+		},
+	)
 
-	r, methods := routes.Routes(trees)
+	r := routes.NewRoutes(router)
 
 	// Start server
 	port := ":8080"
 	fmt.Printf("🚀 Server starting on http://localhost%s\n", port)
 	fmt.Println("📦 Press Ctrl+C to stop")
-	fmt.Println("✨ New today: Artist details pages with locations and dates!")
-	for _, m := range methods {
-		fmt.Printf("%v	%v\n", m.Method, m.Path)
+	for _, t := range router {
+		fmt.Printf("%v	%v\n", t.Method, t.Path)
 	}
 
 	err := http.ListenAndServe(port, r)

@@ -44,10 +44,10 @@ func TestCSSClasses(t *testing.T) {
 		".artist-image",
 		".artist-info",
 		".details-link",
-		".error-container",  // Changed from .error-page to .error-container
+		".error-container", // Changed from .error-page to .error-container
 		".home-button",
-		".theme-toggle",     // Added new class
-		".theme-btn",        // Added new class
+		".theme-toggle", // Added new class
+		".theme-btn",    // Added new class
 	}
 
 	for _, class := range expectedClasses {

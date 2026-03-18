@@ -3,7 +3,6 @@ package routes
 import (
 	"net/http"
 	"net/http/httptest"
-	"reflect"
 	"testing"
 )
 
@@ -14,33 +13,24 @@ func test2(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 func TestRoutes(t *testing.T) {
-	var testTree []Tree
+	var testRoutes []Routes
 
-	testTree = append(testTree, Tree{
+	testRoutes = append(testRoutes, Routes{
 		Handler: test1,
-		Method: http.MethodGet,
-		Path: "/",
+		Method:  http.MethodGet,
+		Path:    "/",
 	},
-	Tree{
-		Handler: test2,
-		Method: http.MethodGet,
-		Path: "/source",
-	})
+		Routes{
+			Handler: test2,
+			Method:  http.MethodGet,
+			Path:    "/source",
+		})
 
-	mux, routes := Routes(testTree)
+	mux := NewRoutes(testRoutes)
 
-	expectedTree := []Tree{
-		{Method: http.MethodGet, Path: "/"},
-		{Method: http.MethodGet, Path: "/source?id={id}"},
-	}
-
-	if !reflect.DeepEqual(expectedTree, routes) {
-		t.Errorf("the routes arent displayed properly\n")
-	}
-
-	tests := []struct{
+	tests := []struct {
 		Path string
-	} {
+	}{
 		{"/"},
 		{"/source"},
 	}

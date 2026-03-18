@@ -18,13 +18,6 @@ func SetTemplateCache(tmpl *template.Template) {
 	templates = tmpl
 }
 
-type Artist struct {
-	ID           int
-	Locations    []string
-	ConcertDates []string
-	Relations    map[string][]string
-}
-
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		utils.ErrorHandler(w, r, http.StatusNotFound, "page not found")
@@ -69,6 +62,7 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	var relations map[string][]string
 	var locErr, dateErr, relErr error
 
+	// wait group - sync
 	var wg sync.WaitGroup
 	wg.Add(3)
 	go func() {
@@ -85,16 +79,29 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	}()
 	wg.Wait()
 
+	if locErr != nil {
+		utils.ErrorHandler(w, r, http.StatusInternalServerError, "Failed to get locations: "+err.Error())
+		return
+	}
+	if dateErr != nil {
+		utils.ErrorHandler(w, r, http.StatusInternalServerError, "Failed to get dates: "+err.Error())
+		return
+	}
+	if relErr != nil {
+		utils.ErrorHandler(w, r, http.StatusInternalServerError, "Failed to get relations: "+err.Error())
+		return
+	}
+
 	var artist models.FullArtistData
 
 	found := false
 	for _, a := range artists {
 		if a.ID == artistID {
 			artist = models.FullArtistData{
-				Artist:    a,
-				Locations: a.Locations,
-				Dates:     a.ConcertDates,
-				Relations: a.Relations,
+				Artist:       a,
+				Locations:    locations,
+				ConcertDates: dates,
+				Relations:    relations,
 			}
 			found = true
 			break
@@ -103,27 +110,6 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	if !found {
 		utils.ErrorHandler(w, r, http.StatusNotFound, "Artist not found")
 		return
-	}
-
-	// Fetch additional data
-
-	if locErr != nil {
-		// Log but continue with empty locations
-		artist.Locations = []string{}
-	} else {
-		artist.Locations = locations
-	}
-
-	if dateErr != nil {
-		artist.ConcertDates = []string{}
-	} else {
-		artist.ConcertDates = dates
-	}
-
-	if relErr != nil {
-		artist.Relations = map[string][]string{}
-	} else {
-		artist.Relations = relations
 	}
 
 	// Use cached template
