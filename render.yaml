@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: groupie-tracker
+    runtime: go
+    repo: https://github.com/bkoimett/groupie-tracker
+    plan: free
+    buildCommand: go build -o app ./cmd
+    startCommand: ./app
+    envVars:
+      - key: PORT
+        value: 8080
