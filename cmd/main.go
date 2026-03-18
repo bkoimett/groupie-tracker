@@ -8,17 +8,49 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 )
 
 // TemplateCache stores parsed templates for reuse
 var TemplateCache *template.Template
 
 func init() {
-	// Parse all templates with functions
-	TemplateCache = template.Must(template.New("").ParseGlob("../internal/templates/*.html"))
+    // Try multiple possible paths
+    possiblePaths := []string{
+        // When running from project root (Render)
+        "internal/templates/*.html",
+        // When running from cmd/ (local development)
+        "../internal/templates/*.html",
+        // Absolute path from executable
+        filepath.Join(getExecutableDir(), "internal", "templates", "*.html"),
+    }
 
-	// Make templates available to handlers
-	handlers.SetTemplateCache(TemplateCache)
+    var templates *template.Template
+    var err error
+    
+
+    // Try each path until one works
+    for _, path := range possiblePaths {
+        templates, err = template.New("").ParseGlob(path)
+        if err == nil {
+            TemplateCache = templates
+            handlers.SetTemplateCache(TemplateCache)
+            fmt.Printf("✅ Templates loaded from: %s\n", path)
+            return
+        }
+    }
+    
+    // If we get here, none of the paths worked
+    log.Fatal("Failed to load templates from any path")
+}
+
+// Helper function to get the directory of the executable
+func getExecutableDir() string {
+    exe, err := os.Executable()
+    if err != nil {
+        return ""
+    }
+    return filepath.Dir(exe)
 }
 
 func main() {
